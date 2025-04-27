@@ -1,0 +1,18 @@
+- name: Install packages on target hosts
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: Prometheus Setup
+    block:
+    - name: download
+      include_tasks: download_prometheus.yml
+    - name: config
+      include_tasks: config_prometheus.yml
+
+    delegate_to: kale
+  - name: Node Exporter Setup
+    block:
+    - name: Download and config
+      include_tasks: node_exporter_config.yml
+    delegate_to: ansb
