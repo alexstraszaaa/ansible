@@ -1,0 +1,11 @@
+global:
+  scrape_interval: 1s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 1s
+
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["192.168.100.11:9090"]
+  - job_name: "ubuntu_server"
+    static_configs:
+      - targets: ["192.168.100.10:9100"]
