@@ -28,12 +28,6 @@
     dest: /etc/prometheus/prometheus.yml
 
 
-- name: Send binary file
-  copy:
-    src: /home/kale/prometheus-3.3.0.linux-amd64/prometheus
-    dest: /usr/bin/prometheus
-    remote_src: yes
-
       #- name: User creation
       # shell: useradd -rs /bin/false prometheus
 
