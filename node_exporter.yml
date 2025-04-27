@@ -1,0 +1,34 @@
+- name: Download Node exporter
+  get_url:
+      url:  "{{ node_url }}"
+      dest: /home/ansb/node_exporter.tar.gz
+
+- name: Install Node exporter
+  shell: "tar zxvf /home/ansb/node_exporter.tar.gz"
+
+
+- name: Create Node service
+  template:
+    src: node_service.j2
+    dest: /etc/systemd/system/node_exporter.service
+    mode: '0644'
+
+    #- name: Create user
+          #  shell: useradd -rs /bin/false node_exporter
+
+- name: Owner Change
+  shell: chown -R node_exporter:node_exporter /usr/bin/node_exporter
+
+- name: Send binary file
+  copy:
+    src: /home/ansb/node_exporter-1.9.1.linux-amd64/node_exporter
+    dest: /usr/bin/node_exporter
+    remote_src: yes
+
+
+- name: Reload Node Exporter
+  systemd:
+    name: node_exporter.service
+    daemon_reload: yes
+    enabled: yes
+    state: started
