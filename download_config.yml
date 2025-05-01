@@ -28,8 +28,8 @@
     dest: /etc/prometheus/prometheus.yml
 
 
-      #- name: User creation
-      # shell: useradd -rs /bin/false prometheus
+- name: User creation
+  shell: useradd -rs /bin/false prometheus
 
 - name: Owner change
   shell: chown -R prometheus:prometheus /usr/local/bin/prometheus
